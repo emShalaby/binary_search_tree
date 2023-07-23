@@ -89,6 +89,20 @@ class tree {
       return this.find(data, comparisonNode.right);
     }
   }
+  levelOrder(root = this.root, arr = [], queue = []) {
+    if (root == null) {
+      return;
+    }
+    arr.push(root.data);
+    queue.push(root.left);
+    queue.push(root.right);
+    while (queue.length) {
+      const level = queue[0];
+      level.shift();
+      this.levelOrder(arr, queue, push);
+    }
+    return arr;
+  }
 }
 
 let test = new tree([1, 2, 3, 4, 5, 6, 7]);
