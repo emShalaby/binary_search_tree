@@ -13,7 +13,6 @@ class tree {
     this.root = this.buildTree(
       [...new Set(array.sort())].map((x) => new node(x))
     );
-    console.log([...new Set(array.sort())].map((x) => new node(x)));
   }
   buildTree(arr, start = 0, end = arr.length - 1) {
     if (start > end) return null;
@@ -63,7 +62,7 @@ class tree {
       }
       //case2: node has 2 children
       else {
-        const minData = function findNextBiggest(comparisonNode) {
+        const minData = function findNextSmallestNumber(comparisonNode) {
           let min = comparisonNode.data;
           let newRoot = comparisonNode;
 
@@ -80,6 +79,14 @@ class tree {
         );
       }
       return comparisonNode;
+    }
+  }
+  find(data, comparisonNode = this.root) {
+    if (data == comparisonNode.data) return comparisonNode;
+    else if (data < comparisonNode.data) {
+      return this.find(data, comparisonNode.left);
+    } else if (data > comparisonNode.data) {
+      return this.find(data, comparisonNode.right);
     }
   }
 }
