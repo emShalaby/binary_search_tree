@@ -13,15 +13,34 @@ class tree {
     this.root = this.buildTree(
       [...new Set(array.sort())].map((x) => new node(x))
     );
+    console.log([...new Set(array.sort())].map((x) => new node(x)));
   }
   buildTree(arr, start = 0, end = arr.length - 1) {
     if (start > end) return null;
-    let mid = Math.floor((start + end) / 2);
-    let root = arr[mid];
-    root.left = this.buildTree(arr, start, (end = mid - 1));
-    root.right = this.buildTree(arr, (start = mid + 1), end);
+    const mid = parseInt((start + end) / 2);
+    const root = arr[mid];
+    root.left = this.buildTree(arr, start, mid - 1);
+    root.right = this.buildTree(arr, mid + 1, end);
     return root;
+  }
+
+  insert(value, comparisonNode = this.root) {
+    let someNode = new node(value);
+    if (someNode.data > comparisonNode.data) {
+      if (!comparisonNode.right) {
+        comparisonNode.right = someNode;
+        return;
+      }
+      this.insert(someNode.data, comparisonNode.right);
+    }
+    if (someNode.data < comparisonNode.data) {
+      if (!comparisonNode.left) {
+        comparisonNode.left = someNode;
+        return;
+      }
+      this.insert(someNode.data, comparisonNode.left);
+    }
   }
 }
 
-let test = new tree([1, 5, 690, 12, 1, 2, 5, 69, 48, 23]);
+let test = new tree([1, 4, 3, 2]);
