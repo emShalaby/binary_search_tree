@@ -41,6 +41,47 @@ class tree {
       this.insert(someNode.data, comparisonNode.left);
     }
   }
+  delete(data, comparisonNode = this.root) {
+    if (comparisonNode === null) {
+      return comparisonNode;
+    }
+    //value is less than go left
+    if (data < comparisonNode.data) {
+      comparisonNode = this.delete(data, comparisonNode.left);
+    }
+    //value is more then go right
+    else if (data > comparisonNode.data) {
+      comparisonNode = this.delete(data, comparisonNode.right);
+    }
+    //value matches , then delete node and update tree
+    else if (data == comparisonNode.data) {
+      //case1: node has 1 child or no children in no children case it will just return null
+      if (!comparisonNode.left) {
+        return comparisonNode.right;
+      } else if (!comparisonNode.right) {
+        return comparisonNode.left;
+      }
+      //case2: node has 2 children
+      else {
+        const minData = function findNextBiggest(comparisonNode) {
+          let min = comparisonNode.data;
+          let newRoot = comparisonNode;
+
+          while (newRoot.left !== null) {
+            min = root.left.data;
+            newRoot = root.left;
+          }
+          return min;
+        };
+        comparisonNode.data = minData(comparisonNode.right);
+        comparisonNode.right = this.delete(
+          comparisonNode.data,
+          comparisonNode.right
+        );
+      }
+      return comparisonNode;
+    }
+  }
 }
 
-let test = new tree([1, 4, 3, 2]);
+let test = new tree([1, 2, 3, 4, 5, 6, 7]);
