@@ -110,5 +110,6 @@ class tree {
     }
     return result;
   }
+
 }
 let test = new tree([1, 2, 3, 4, 5, 6, 7]);
