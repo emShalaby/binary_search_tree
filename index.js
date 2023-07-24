@@ -111,5 +111,29 @@ class tree {
     return result;
   }
 
+  inorder(root = this.root, result = []) {
+    if (root) {
+      this.inorder(root.left, result);
+      result.push(root.data);
+      this.inorder(root.right, result);
+    }
+    return result;
+  }
+  preorder(root = this.root, result = []) {
+    if (root) {
+      result.push(root.data);
+      this.preorder(root.left, result);
+      this.preorder(root.right, result);
+    }
+    return result;
+  }
+  postorder(root = this.root, result = []) {
+    if (root) {
+      this.postorder(root.left, result);
+      this.postorder(root.right, result);
+      result.push(root.data);
+    }
+    return result;
+  }
 }
-let test = new tree([1, 2, 3, 4, 5, 6, 7]);
+let test = new tree([1, 2, 3, 4, 5, 6]);
