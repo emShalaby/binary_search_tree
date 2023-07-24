@@ -82,6 +82,7 @@ class tree {
     }
   }
   find(data, comparisonNode = this.root) {
+    if (!comparisonNode) return null;
     if (data == comparisonNode.data) return comparisonNode;
     else if (data < comparisonNode.data) {
       return this.find(data, comparisonNode.left);
@@ -135,14 +136,13 @@ class tree {
     }
     return result;
   }
-  height(value) {
-    let counter = 0;
-    let curr = this.find(value);
-    while (curr) {
-      curr = curr.left ? curr.left : curr.right;
-      if (curr) counter++;
-    }
-    return counter;
+  height(data) {
+    let node = this.find(data);
+    if (!node) return -1;
+
+    let leftHeight = this.height(node.left ? node.left.data : null);
+    let rightHeight = this.height(node.right ? node.right.data : null);
+    return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
   }
 }
-let test = new tree([1, 2, 3, 4, 5, 6]);
+let test = new tree([1, 2, 3, 4, 5, 6,7,8,9,10,11,12]);
