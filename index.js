@@ -135,5 +135,14 @@ class tree {
     }
     return result;
   }
+  height(value) {
+    let counter = 0;
+    let curr = this.find(value);
+    while (curr) {
+      curr = curr.left ? curr.left : curr.right;
+      if (curr) counter++;
+    }
+    return counter;
+  }
 }
 let test = new tree([1, 2, 3, 4, 5, 6]);
