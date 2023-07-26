@@ -11,7 +11,7 @@ class tree {
     //fancy way of sorting the array and getting rid of duplicates and create nodes out of each value
 
     this.root = this.buildTree(
-      [...new Set(array.sort())].map((x) => new node(x))
+      [...new Set(array.sort((a, b) => a - b))].map((x) => new node(x))
     );
   }
   buildTree(arr, start = 0, end = arr.length - 1) {
@@ -145,4 +145,4 @@ class tree {
     return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
   }
 }
-let test = new tree([1, 2, 3, 4, 5, 6,7,8,9,10,11,12]);
+let test = new tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
