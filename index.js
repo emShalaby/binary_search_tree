@@ -144,5 +144,19 @@ class tree {
     let rightHeight = this.height(node.right ? node.right.data : null);
     return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
   }
+  depth(data) {
+    let depth = 0;
+    let root = this.root;
+    while (root) {
+      if (data < root.data) {
+        depth++;
+        root = root.left;
+      } else if (data > root.data) {
+        depth++;
+        root = root.right;
+      } else if (root.data == data) return depth;
+    }
+    return null;
+  }
 }
 let test = new tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
