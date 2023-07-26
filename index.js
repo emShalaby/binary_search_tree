@@ -158,5 +158,25 @@ class tree {
     }
     return null;
   }
+  balanceHeight(currNode = this.root) {
+    if (currNode == null) return -1;
+    let leftHeight = this.balanceHeight(currNode.left);
+    if (leftHeight == -2) return -2;
+    let rightHeight = this.balanceHeight(currNode.right);
+    if (rightHeight == -2) return -2;
+
+    if (Math.abs(leftHeight - rightHeight) > 1) return -2;
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+  isBalanced() {
+    if (this.balanceHeight() == -2) return false;
+    else return true;
+  }
+  rebalance() {
+    let arr = this.postorder();
+    this.root = this.buildTree(
+      [...new Set(arr.sort((a, b) => a - b))].map((x) => new node(x))
+    );
+  }
 }
 let test = new tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
